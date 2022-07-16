@@ -17,3 +17,11 @@ def CO(request):
 def Update_Profile(request):
     context = {}
     return render(request,'cms/Update_Profile.html',context)
+
+def Preview(request):
+    context={}
+    return render(request, 'cms/Preview.html', context)
+
+def secsignin(request):
+    context={}
+    return render(request, 'cms/secsignin.html', context)
