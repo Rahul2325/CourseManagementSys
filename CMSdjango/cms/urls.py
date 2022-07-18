@@ -10,6 +10,8 @@ urlpatterns = [
     path('Preview',views.Preview, name="Preview"),
     path('secsignin',views.secsignin, name="secsignin"),
     path('register',views.register, name="register"),
-    path('display',views.display, name="display")
+    path('display',views.display, name="display"),
+    path('Catalog',views.Catalog, name="Catalog"),
+
 
 ]

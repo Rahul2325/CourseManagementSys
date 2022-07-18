@@ -23,8 +23,6 @@ signinbtn.addEventListener("click", function(e) {
         alert("Invalid Email Address"); 
     }else if(pw.value.length<8){
         alert("Password length should greater than 8 characters");
-    }else{
-        location.href="{% url 'Catalog'%}";
     }
     //not to submit form
     e.preventDefault();

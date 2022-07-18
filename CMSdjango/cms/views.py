@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from datetime import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth import logout, authenticate
 
 from django.forms import modelform_factory
 
@@ -9,8 +11,9 @@ reg_form = modelform_factory(Regform, exclude=[])
 # Create your views here.
 #example
 def Catalog(request):
-    context = {}
-    return render(request,'cms/Catalog.html',context)
+    if request.user.is_anonymous:
+        return redirect('cms/secsignin.html')
+    return render(request,'cms/Catalog.html',)
 
 def CC(request):
     context = {}
@@ -28,9 +31,7 @@ def Preview(request):
     context={}
     return render(request, 'cms/Preview.html', context)
 
-def secsignin(request):
-    context={}
-    return render(request, 'cms/secsignin.html', context)
+
 
 def register(request):
     if request.method=="POST":
@@ -53,3 +54,25 @@ def register(request):
 def display(request):
     context={}
     return render(request, 'cms/display.html', context)
+
+# Login authentication
+
+
+def secsignin(request):
+    if request.method=="POST":
+        emailid= request.GET('emailid')
+        password= request.GET('password')
+        print(emailid, password)
+        # if user has entered the correct credentials
+        user = authenticate(email=emailid, password=password)
+        if user is not None:
+            # A backend authenticated the credentials
+            return redirect('cms/Catalog.html')
+        else:
+            return render(request, 'cms/secsignin.html', )
+            # No backend authenticated the credentials
+    return render(request, 'cms/secsignin.html')
+
+def secsignout(request):
+    logout(request)
+    return redirect('secsignin.html')

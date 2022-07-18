@@ -10,6 +10,6 @@ class Regform(models.Model):
 
     
     def __str__(self):
-        return self.username 
+        return self.firstName 
         #  in admin panel, all of the above details will be store under the username
     
