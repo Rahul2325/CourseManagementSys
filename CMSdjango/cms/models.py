@@ -9,6 +9,7 @@ class Regform(models.Model):
     password = models.CharField(max_length=30,unique=True)
 
     
-    def _str_(self):
-        return self.username
+    def __str__(self):
+        return self.username 
+        #  in admin panel, all of the above details will be store under the username
     
