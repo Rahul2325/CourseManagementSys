@@ -1,8 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from datetime import datetime
-from django.contrib.auth.models import User
-from django.contrib.auth import logout, authenticate
+# from django.contrib.auth.models import User
+# from django.contrib.auth import logout, authenticate, login
 
 from django.forms import modelform_factory
 
@@ -11,9 +12,10 @@ reg_form = modelform_factory(Regform, exclude=[])
 # Create your views here.
 #example
 def Catalog(request):
-    if request.user.is_anonymous:
-        return redirect('cms/secsignin.html')
-    return render(request,'cms/Catalog.html',)
+    # print(request.user)
+    # if request.user.is_anonymous:
+    #     return redirect('secsignin')
+    return render(request,'cms/Catalog.html')
 
 def CC(request):
     context = {}
@@ -35,21 +37,43 @@ def Preview(request):
 
 def register(request):
     if request.method=="POST":
-        register = reg_form(request.POST)
-        # fname =request.POST['firstName']
-        # Lname =request.POST['lastName']
-        # DOB =request.POST['DOB']
-        # email=request.POST['email']
-        # password=request.POST['password']
-        # username=request.POST['username']
-        # register=Regform(firstName=fname,lastName=Lname,username=username,email=email,password=password,DOB=DOB)
-        if register.is_valid():
-            register.save()
-            return render(request, 'cms/display.html')
+        # register = reg_form(request.POST)
+        # # fname=register.cleaned_data.get('firstName')
+        # email=request.POST.get('email')
+        # password=request.POST.get('password')
+        fname =request.POST['firstName']
+        lname =request.POST['lastName']
+        DOB =request.POST['DOB']
+        email=request.POST['email']
+        password=request.POST['password']
+        password2=request.POST['password2']
+        username=request.POST['username']
+        if password==password2:
+            if Regform.objects.filter(email=email).exists():
+                return HttpResponse("Email already exists")
+            else:
+                register=Regform(firstName=fname,lastName=lname,username=username,email=email,password=password,password2=password2,DOB=DOB)
+                register.save()
+                # context={
+                #     "firstname":fname,
+                #     "lastname":lname
+                # }
+                return render(request, 'cms/display.html')
         else:
-            return render(request, 'cms/register.html')
-    else:    
-        return render(request, 'cms/register.html')    
+            return HttpResponse("Password Dosen't Match")
+    else:
+        return render(request, 'cms/register.html')
+
+
+    #     if register.is_valid():
+    #         register.save()
+    #         user = User.objects.create_user(email,password)
+    #         user.save()
+    #         return render(request, 'cms/display.html')
+    #     else:
+    #         return render(request, 'cms/register.html')
+    # else:    
+    #     return render(request, 'cms/register.html')    
 
 def display(request):
     context={}
@@ -59,20 +83,41 @@ def display(request):
 
 
 def secsignin(request):
+    # print(request)
     if request.method=="POST":
-        emailid= request.GET('emailid')
-        password= request.GET('password')
-        print(emailid, password)
-        # if user has entered the correct credentials
-        user = authenticate(email=emailid, password=password)
-        if user is not None:
-            # A backend authenticated the credentials
-            return redirect('cms/Catalog.html')
+        # print(request.POST['emailid'])
+        # print(request.POST['password'])
+        email = request.POST['email']
+        password= request.POST['password']
+        if Regform.objects.filter(email=email).exists():
+            if Regform.objects.filter(password=password).exists():
+                context={
+                        "email":email
+                }
+                return render(request, 'cms/Catalog.html', context)
+            else:
+                return HttpResponse("Wrong Password")
         else:
-            return render(request, 'cms/secsignin.html', )
+            return HttpResponse("Invalid Email")
+    else:
+        return render(request, 'cms/secsignin.html')
+
+
+
+
+        
+        # if user has entered the correct credentials
+        # user = authenticate(email=emailid, password=password)
+        
+        # if user is not None:
+        #     login(request, user)
+            # A backend authenticated the credentials
+            # return redirect("Catalog")
+        # else:
+        #     return render(request, 'cms/secsignin.html', )
             # No backend authenticated the credentials
-    return render(request, 'cms/secsignin.html')
+    # return render(request, 'cms/secsignin.html')
 
 def secsignout(request):
     logout(request)
-    return redirect('secsignin.html')
+    return redirect('cms/secsignin')

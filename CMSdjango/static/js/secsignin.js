@@ -25,7 +25,7 @@ signinbtn.addEventListener("click", function(e) {
         alert("Password length should greater than 8 characters");
     }
     //not to submit form
-    e.preventDefault();
+    // e.preventDefault();
 });
 
 
