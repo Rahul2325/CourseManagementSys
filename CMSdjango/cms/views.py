@@ -26,8 +26,8 @@ def CO(request):
     return render(request,'cms/CO.html',context)
 
 def Update_Profile(request):
-    context = {}
-    return render(request,'cms/Update_Profile.html',context)
+    Register=Regform.objects.all()
+    return render(request,'cms/Update_Profile.html',{'Register': Register})
 
 def Preview(request):
     context={}
