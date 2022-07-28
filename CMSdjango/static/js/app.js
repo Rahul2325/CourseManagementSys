@@ -5,7 +5,9 @@ icon.addEventListener('click',function(){
     console.log('disabled');
     p_details.classList.toggle('disabled');
     return false;
+    
 })
+
 const search = document.getElementById('inputbox');
 // console.log(search)
 search.addEventListener('input',function(){
