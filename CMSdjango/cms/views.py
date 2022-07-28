@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from datetime import datetime
+from . models import Regform
 # from django.contrib.auth.models import User
 # from django.contrib.auth import logout, authenticate, login
 
@@ -15,6 +16,8 @@ def Catalog(request):
     # print(request.user)
     # if request.user.is_anonymous:
     #     return redirect('secsignin')
+    # data = Regform.objects.all()
+    # fdata = data.filter(id=Update_Profile)
     return render(request,'cms/Catalog.html')
 
 def CC(request):
@@ -25,9 +28,11 @@ def CO(request):
     context = {}
     return render(request,'cms/CO.html',context)
 
-def Update_Profile(request):
-    Register=Regform.objects.all()
-    return render(request,'cms/Update_Profile.html',{'Register': Register})
+# def Update_Profile(request):
+    
+#     Register=Regform.objects.all()
+#     print(Register)
+#     return render(request,'cms/Update_Profile.html',{'Register': Register})
 
 def Preview(request):
     context={}
@@ -92,7 +97,8 @@ def secsignin(request):
         if Regform.objects.filter(email=email).exists():
             if Regform.objects.filter(password=password).exists():
                 context={
-                        "email":email
+                        "email":email,
+
                 }
                 return render(request, 'cms/Catalog.html', context)
             else:
@@ -104,6 +110,14 @@ def secsignin(request):
 
 
 
+def Update_Profile(request, Update_Profile):
+    data = Regform.objects.all() #importing all the dataa from the db
+    fdata = data.filter(id=Update_Profile)
+    print(fdata,"888888888")
+    print(data)
+    print(fdata,"==============")
+    return render(request,'cms/Update_Profile.html',{'Register': fdata})
+    
 
         
         # if user has entered the correct credentials

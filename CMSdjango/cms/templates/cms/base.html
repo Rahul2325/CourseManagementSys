@@ -32,10 +32,10 @@
       <div class="navbar-collapse collapse show" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active " href="{% url 'Catalog'%}">Course Catalog</a>
+            <a class="nav-link active " href="{% url 'Catalog' %}">Course Catalog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'CC'%}">Create Course</a>
+            <a class="nav-link active" href="{% url 'CC' %}">Create Course</a>
           </li>
         </ul>
       </div>
@@ -50,14 +50,14 @@
         </div>
         <div class="profile_details disabled">
           <ul class="profile_ul">
-            <!-- <a class="profile" href="#" style="text-decoration:none; color:black;"> -->
+            <a class="profile" href="{% url 'Update_Profile Update_Profile.id' %}" style="text-decoration:none; color:black;"> 
             <li class="profile_li">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill me-2 mt-1" viewBox="0 0 16 16">
                   <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                 </svg>
                 Profile
             </li>
-          <!-- </a> -->
+          </a>
           <!-- <a class="Logout" href="#" style="text-decoration:none; color:black;"> -->
             <li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right me-2 mt-1" viewBox="0 0 16 16">
@@ -71,7 +71,6 @@
         </div>
       </div>
   </nav>
-
   {% block content%}
 
   {% endblock content%}
@@ -81,9 +80,9 @@
 
 
 
+  <script src="{% static 'js/base.js'%}"></script>
 
-    <!-- </div> -->
-    <script src=""></script>
+    
 </body>
 
 </html>
