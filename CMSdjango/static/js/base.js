@@ -29,5 +29,5 @@ cc.addEventListener('click',function(){
 
 const profile = getElementById('profile');
 profile.addEventListener('click',function(){
-    location.href='cms/templates/cms/Update_Profile.html'
+    location.href='cms/templates/cms/Update_Profile.html';
 })

@@ -2,9 +2,9 @@ from django.contrib import admin
 from cms.models import Userlist
 
 class RegformUser(admin.ModelAdmin):
-    list_display=('id', 'DOB',)
-    list_display_links=('id',)
-    list_filter=('id',)
+    list_display=('firstName', 'email',)
+    list_display_links=('firstName',)
+    list_filter=('firstName',)
 
 
 

@@ -55,12 +55,12 @@ def register(request):
         password2=request.POST['password2']
         username=request.POST['username']
         if password==password2:
-            if Regform.objects.filter(email=email).exists():
+            if Userlist.objects.filter(email=email).exists():
                 return HttpResponse("Email already exists")
             else:
-                register=User(first_name=fname,last_name=lname,username=username,email=email,password=password)
+                register=User(firstName=fname,lastName=lname,username=username,email=email,password=password)
                 register.save()
-                Userlist(user_id=register, DOB=DOB).save()
+                Userlist(user_id=register.id, DOB=DOB).save()
                 # print(register.id)
                 # context={
                 #     "firstname":fname,
