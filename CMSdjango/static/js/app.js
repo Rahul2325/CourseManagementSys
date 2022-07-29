@@ -8,12 +8,12 @@ icon.addEventListener('click',function(){
     
 })
 
-const search = document.getElementById('inputbox');
-// console.log(search)
-search.addEventListener('input',function(){
-    filtering(search.value)
-    // console.log(search.value)
-})
+// const search = document.getElementById('inputbox');
+// // console.log(search)
+// search.addEventListener('input',function(){
+//     filtering(search.value)
+//     // console.log(search.value)
+// })
 
 async function filtering(search){
     const data= await fetch('./data.json');

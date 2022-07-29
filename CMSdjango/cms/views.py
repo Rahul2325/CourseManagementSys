@@ -2,13 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from datetime import datetime
-from . models import Regform
+# from . models import Regform
+from . models import Userlist
 # from django.contrib.auth.models import User
 # from django.contrib.auth import logout, authenticate, login
 
 from django.forms import modelform_factory
 
-reg_form = modelform_factory(Regform, exclude=[])
+# reg_form = modelform_factory(Regform, exclude=[])
 
 # Create your views here.
 #example
@@ -57,8 +58,10 @@ def register(request):
             if Regform.objects.filter(email=email).exists():
                 return HttpResponse("Email already exists")
             else:
-                register=Regform(firstName=fname,lastName=lname,username=username,email=email,password=password,password2=password2,DOB=DOB)
+                register=User(first_name=fname,last_name=lname,username=username,email=email,password=password)
                 register.save()
+                Userlist(user_id=register, DOB=DOB).save()
+                # print(register.id)
                 # context={
                 #     "firstname":fname,
                 #     "lastname":lname
@@ -89,13 +92,15 @@ def display(request):
 
 def secsignin(request):
     # print(request)
+    user_id=request.user.id
+    print(user_id)
     if request.method=="POST":
         # print(request.POST['emailid'])
         # print(request.POST['password'])
         email = request.POST['email']
         password= request.POST['password']
-        if Regform.objects.filter(email=email).exists():
-            if Regform.objects.filter(password=password).exists():
+        if Userlist.objects.filter(email=email).exists():
+            if Userlist.objects.filter(password=password).exists():
                 context={
                         "email":email,
 
@@ -111,7 +116,7 @@ def secsignin(request):
 
 
 def Update_Profile(request, Userid):
-    data = Regform.objects.all() #importing all the dataa from the db
+    data = Userlist.objects.all() #importing all the dataa from the db
     fdata = data.filter(id=Userid)
     # print(fdata,"888888888")
     # print(data)
@@ -136,3 +141,4 @@ def Update_Profile(request, Userid):
 def secsignout(request):
     logout(request)
     return redirect('cms/secsignin')
+
