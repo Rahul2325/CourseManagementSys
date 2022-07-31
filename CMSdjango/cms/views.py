@@ -7,7 +7,7 @@ from . models import Userlist
 # from django.contrib.auth.models import User
 # from django.contrib.auth import logout, authenticate, login
 
-from django.forms import modelform_factory
+# from django.forms import modelform_factory
 
 # reg_form = modelform_factory(Regform, exclude=[])
 
@@ -58,9 +58,10 @@ def register(request):
             if Userlist.objects.filter(email=email).exists():
                 return HttpResponse("Email already exists")
             else:
-                register=User(first_name=fname,last_name=lname,username=username,email=email,password=password,password2=password2)
+                register=Userlist(firstName=fname,lastName=lname,username=username,email=email,password=password,password2=password2, DOB=DOB)
                 register.save()
-                Userlist(user_id=register, DOB=DOB).save()
+                # Userlist(user_id=register.id, DOB=DOB).save()
+                # Userlist(user_id=register, password2=password2).save()
                 # print(register.id)
                 # context={
                 #     "firstname":fname,
@@ -92,8 +93,8 @@ def display(request):
 
 def secsignin(request):
     # print(request)
-    user_id=request.user.id
-    print(user_id)
+    # user_id=request.user.id
+    # print(user_id)
     if request.method=="POST":
         # print(request.POST['emailid'])
         # print(request.POST['password'])
@@ -115,9 +116,9 @@ def secsignin(request):
 
 
 
-def Update_Profile(request, Userid):
+def Update_Profile(request, user_id):
     data = Userlist.objects.all() #importing all the dataa from the db
-    fdata = data.filter(id=Userid)
+    fdata = data.filter(id=user_id)
     # print(fdata,"888888888")
     # print(data)
     print(fdata,"==============")
@@ -138,7 +139,7 @@ def Update_Profile(request, Userid):
             # No backend authenticated the credentials
     # return render(request, 'cms/secsignin.html')
 
-def secsignout(request):
-    logout(request)
-    return redirect('cms/secsignin')
+# def secsignout(request):
+#     logout(request)
+#     return redirect('cms/secsignin')
 

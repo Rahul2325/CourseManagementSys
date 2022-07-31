@@ -17,7 +17,7 @@ from django.contrib.auth.models import User
         #  in admin panel, all of the above details will be store under the username
     
 class Userlist(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     firstName=models.CharField(max_length=30,unique=True)
     lastName=models.CharField(max_length=30,unique=True)
     username = models.CharField(max_length = 30,unique=True)
@@ -27,4 +27,4 @@ class Userlist(models.Model):
     password2 = models.CharField(max_length=30)
 
     def __str__(self):
-        return str(self.user_id)
+        return self.firstName

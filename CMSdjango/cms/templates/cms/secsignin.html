@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center m-0" style="height: 100vh;">
           <div class="formm">
-            <form method="POST" action="{% url 'cms:secsignin' %}" id="login" autocomplete="off" class="bg-light border p-4" style="box-shadow:3px 3px 3px rgba(0,0,0,0.5);">
+            <form method="POST" action="{% url 'secsignin' %}" id="login" autocomplete="off" class="bg-light border p-4" style="box-shadow:3px 3px 3px rgba(0,0,0,0.5);">
               {% csrf_token %}  
               <h2 class="title my-3 py-3 " style="color:#4c4f94; font-weight:550;">Enter your credentials</h2>
               <div class="form-row">
