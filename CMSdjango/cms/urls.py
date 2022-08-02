@@ -8,12 +8,15 @@ urlpatterns = [
     # path('',views.Catalog, name="Catalog"),
     path('CC',views.CC, name="CC"),
     path('CO',views.CO, name="CO"),
-    path('<int:user_id>/',views.Update_Profile, name="Update_Profile"),
-    path('Preview',views.Preview, name="Preview"),
-    path('',views.secsignin, name="secsignin"),
-    path('register',views.register, name="register"),
+    # path('Update_Profile',views.user_profile, name="Update_Profile"),
+    # path('Preview',views.Preview, name="Preview"),
+    # path('',views.secsignin, name="secsignin"),
+    # path('Register',views.register, name="register"),
     # path('<int:User_id>/',views.display, name="display"),
-    path('Catalog',views.Catalog, name="Catalog")
+    path('Catalog',views.Catalog, name="Catalog"),
+    path('Signup',views.sign_up, name="register"),
+    path('',views.user_login, name="login"),
+    path('profile',views.user_profile, name="profile")
 
 
 ]

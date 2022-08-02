@@ -1,13 +1,13 @@
 from django.contrib import admin
-from cms.models import Userlist
+# from cms.models import User
 
-class UserDisplay(admin.ModelAdmin):
-    list_display=('id','firstName', 'email',)
-    list_display_links=('firstName',)
-    list_filter=('firstName',)
+# class UserDisplay(admin.ModelAdmin):
+#     list_display=('id','firstName', 'email',)
+#     list_display_links=('firstName',)
+#     list_filter=('firstName',)
 
 
 
 # Register your models here.
 # admin.site.register(Regform)
-admin.site.register(Userlist,UserDisplay)
+# admin.site.register(User)

@@ -1,13 +1,15 @@
 //password showing and hiding
 const eye = document.getElementById("eye");
-var pw = document.getElementById("password");
+var pw = document.getElementBy("id_password1");
 
 eye.addEventListener("click", function () {
 if (!eye.classList.contains("fa-eye-slash")) {
-    eye.classList.add("fa-eye-slash");        
+    eye.classList.add("fa-eye-slash");
+    console.log("text")        
     pw.setAttribute("type", "text");
 } else {
     eye.classList.remove("fa-eye-slash");
+    console.log("password") 
     pw.setAttribute("type","password");
 }
 });
