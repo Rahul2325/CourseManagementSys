@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, EditUserProfileForm
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
 from django.contrib.auth import authenticate, login, logout
 
 # from . models import Regform
@@ -187,10 +187,25 @@ def user_profile(request):
         if request.method=="POST":
             form = EditUserProfileForm(request.POST, instance=request.user)
             if form.is_valid():
-                messages.success(request, "Profile Updated!!")
+                messages.success(request, "Profile Updated!!!")
                 form.save()
         else:
             form=EditUserProfileForm(instance=request.user)
         return render(request, 'cms/Update_Profile.html', {'name':request.user, 'form':form})
     else:
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/profile')
+
+
+#Change password with old password
+def user_change_pass(request):
+    print(request.method)
+    if request.method=="POST":
+        fm=PasswordChangeForm(user=request.user, data=request.POST)
+        if fm.is_valid():
+            print("VALIDDDDDDDDDD")
+            fm.save()
+            return HttpResponseRedirect('profile')
+    else:
+        print("NOT VALIDDDDDD")
+        fm=PasswordChangeForm(user=request.user)
+    return render(request,'cms/changepass.html', {'form':fm})
