@@ -1,7 +1,14 @@
 {% extends 'cms/base.html' %}
 {% load static %}
+{% block title %}
+Catalog
+{% endblock %}
 {% block content %}
-
+  {% if messages %}
+    {% for msg in messages %}
+      <small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small>
+    {% endfor %}
+  {% endif %}
 <div class="container mt-4">
     <button type="button" class="btn btn-primary p-2 me-2" onclick=document.location="{% url 'CC' %}"><b>CREATE NEW
         COURSE</b></button>
