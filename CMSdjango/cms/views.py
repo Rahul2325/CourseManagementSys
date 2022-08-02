@@ -24,15 +24,22 @@ def Catalog(request):
     #     return redirect('secsignin')
     # data = Regform.objects.all()
     # fdata = data.filter(id=Update_Profile)
-    return render(request,'cms/Catalog.html')
+    if request.user.is_authenticated:
+        return render(request,'cms/Catalog.html', {'name':request.user})
+    else:
+        return HttpResponseRedirect('/')
 
 def CC(request):
-    context = {}
-    return render(request,'cms/CC.html',context)
+    if request.user.is_authenticated:
+        return render(request,'cms/CC.html', {'name':request.user})
+    else:
+        return HttpResponseRedirect('/')
 
 def CO(request):
-    context = {}
-    return render(request,'cms/CO.html',context)
+    if request.user.is_authenticated:
+        return render(request,'cms/CO.html', {'name':request.user})
+    else:
+        return HttpResponseRedirect('/')
 
 # def Update_Profile(request):
     
@@ -165,21 +172,26 @@ def sign_up(request):
 
 #Login View
 def user_login(request):
-    print(request.method) 
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            print("validddddddd")
-            uname = request.POST.get('username')
-            upass = request.POST.get('password')
-            user = authenticate(username = uname, password = upass)
-            if user is not None:
-                login(request, user)
-                return redirect('/Catalog')
+    print(request) 
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = AuthenticationForm(request=request, data=request.POST)
+            print(form.is_valid())
+            if form.is_valid():
+                print("validddddddd")
+                uname = request.POST.get('username')
+                upass = request.POST.get('password')
+                user = authenticate(username = uname, password = upass)
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, "Logged in successfully!!")
+                    return redirect('/Catalog')
+        else:
+            print("Heloooooooooo")
+            form = AuthenticationForm()
+        return render(request, 'cms/secsignin.html', {'form': form})
     else:
-        print("Heloooooooooo")
-        form = AuthenticationForm()
-    return render(request, 'cms/secsignin.html', {'form': form})
+        return HttpResponseRedirect('/Catalog')
 
 # Profile Page
 def user_profile(request):
@@ -193,4 +205,10 @@ def user_profile(request):
             form=EditUserProfileForm(instance=request.user)
         return render(request, 'cms/Update_Profile.html', {'name':request.user, 'form':form})
     else:
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/')
+
+#Logout
+def user_logout(request):
+    logout(request)
+    print("logout")
+    return HttpResponseRedirect('/')
