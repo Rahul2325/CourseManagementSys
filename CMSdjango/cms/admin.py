@@ -1,10 +1,17 @@
 from django.contrib import admin
+
+from cms.models import Course
 # from cms.models import User
 
-# class UserDisplay(admin.ModelAdmin):
-#     list_display=('id','firstName', 'email',)
-#     list_display_links=('firstName',)
-#     list_filter=('firstName',)
+class CourseDisplay(admin.ModelAdmin):
+    list_display=('id','CourseName', 'Desc','CourseImage',)
+    list_display_links=('CourseName',)
+    list_filter=('CourseName',)
+
+
+admin.site.register(Course,CourseDisplay)
+
+
 
 
 

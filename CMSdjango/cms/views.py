@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-# from .models import *
-from .forms import SignUpForm, EditUserProfileForm
+from .models import *
+from .forms import SignUpForm, EditUserProfileForm, CourseForm
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
@@ -25,7 +25,8 @@ def Catalog(request):
     # data = Regform.objects.all()
     # fdata = data.filter(id=Update_Profile)
     if request.user.is_authenticated:
-        return render(request,'cms/Catalog.html', {'name':request.user})
+        courses=Course.objects.all()
+        return render(request,'cms/Catalog.html', {'courses':courses})
     else:
         return HttpResponseRedirect('/')
 

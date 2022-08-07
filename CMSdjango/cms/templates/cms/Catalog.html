@@ -4,22 +4,27 @@
 Catalog
 {% endblock %}
 {% block content %}
-  {% if messages %}
-    {% for msg in messages %}
-      <small {% if msg.tags %} class="{{msg.tags}}" {% endif %}>{{msg}}</small>
-    {% endfor %}
-  {% endif %}
-<div class="container mt-4">
-    <button type="button" class="btn btn-primary p-2 me-2" onclick=document.location="{% url 'CC' %}"><b>CREATE NEW
-        COURSE</b></button>
-    <button class="btn btn-primary  p-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false"><B> FILTER </B></button>
-  </div>
+<div class="container py-4">
+  <div class="row row-cols-1 row-cols-lg-4 g-4" id="row">
+    {% if courses %}
+      {% for course in courses%}
 
-  <div class="container py-4">
-    <div class="row row-cols-1 row-cols-lg-4 g-4" id="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 w-100">
+          <img src="{{course.CourseImage}}" alt="image" >
+          <div class="card-body">
+              <h5 class="card-title" style="text-align: center;">{{course.CourseName}}</h5>
+              <p class="card-text">{{course.Desc}}</p>
+              <a href="#" class="btn btn-primary">Edit course</a>
+          </div>
+          </div> 
+        </div>
 
-    </div>
+      {% endfor %}
+    {% else %}
+      <h4 class="text-center alert alert-warning">No Records Found</h4>
+    {% endif %}
   </div>
+</div>
   <script src="{% static 'js/app.js' %}">
 {% endblock %}
