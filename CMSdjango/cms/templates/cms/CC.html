@@ -8,94 +8,19 @@ Create Course
     <!-- <h3 class="create my-2" style="color: rgb(0, 0, 0); text-align: center; font-weight: bold; ">Create a Course </h3> -->
     <div class="container my-4 pb-1">
 
-        <form action="# ">
-            <div class ="heading">
-                <h2><b>Create Course</b></h2>
-            </div>
-            <div class="user-details">
-                <div class="row">      
-                    <div class="col-6">
-                        <div class="input-box">
-                            <label for="form-label" class="details"><b>Course Name<span id="red">*</span></b></label>
-                            <input type="text" class="form-control" id="cnam" aria-describedby="emailHelp"
-                                placeholder="Enter the course name" required>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="input-box">
-                            <label for="form-label" class="details"><b>Course Credits<span id="red">*</span></b></label>
-                            <input type="number" class="form-control" id="cred"
-                                aria-describedby="emailHelp" placeholder="Enter course credits" required>
-                        </div>
-                    </div>
-                </div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Submit" class="btn btn-success">
+            <a href="{% url 'Catalog' %}" class="btn btn-danger">Cancel</a>
 
-                <div class="row">
-                    <div class="input-box col-lg-6 col-md-6">
-                        <label for="formFile" class="form-label"><b>Upload course image</b></label>
-                        <input class="form-control" type="file" id="inpFile">
-                    </div>
-
-                    <div class="im col-lg-6 col-md-6" style="justify-content: center; align-items: center; text-align: center;">
-                        <!-- <p></p> -->
-                        <label class="image-preview" id="image-preview">
-                            <img src="" alt="Image Preview" id="ImagePreview" class="image-preview__image">
-                            <span class="image-preview__default-text">Image Preview</span>
-                        </label>
-                    </div>
-                </div>
-
-                <label class="form-label"><b>Add a description</b></label>
-                <div class="form-group">
-                    <textarea class="form-control" rows="3" id="floatingTextarea" style="resize: none; overflow: auto;"
-                        placeholder="Enter a brief description of the course"></textarea>
-                    <!-- <label for="form-label" class="details">Type here..</label> -->
-                </div>
-                <div class="input-box">
-                    <label for="form-label" class="details mt-3"><b>Tags</b></label>
-                    <input type="text" class="form-control" id="tags_input" aria-describedby="emailHelp"
-                        placeholder="Add a comma after each tag">
-
-                </div>
-                <!-- <div class="row"> -->
-                <!-- <div class="col"> -->
-                <!-- <div class="row"> -->
-                <div id="tags"></div>
-                <!-- </div> -->
-                <!-- </div> -->
-                <!-- </div> -->
-                <div class="row">
-                    <div class="col-6">
-                        <div class="md-form">
-                            <label for="startingDate"><b>Start date</b></label>
-                            <input placeholder="Course starting date" type="date" id="startingDate"
-                                class="form-control datepicker">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="md-form">
-                            <label for="endingDate"><b>End date</b></label>
-                            <input placeholder="Course ending date" type="date" id="endingDate"
-                                class="form-control datepicker">
-                        </div>
-                    </div>
-
-                    <div id="btn">
-                        <a href="{% url 'CO'%}">
-                            <button type="button" class="btn btn-primary my-3 " id="sub" style="float:right;">Submit</button></a>
-                        {% comment %} <a href="{% url 'Catalog'%}"> {% endcomment %}
-                            <button type="button" class="btn btn-danger my-3 me-2 "
-                                style="float:right;">Cancel</button></a>
-                    </div>
-                </div>
-            </div>
-
-        </form>
+            
+            <form>
     </div>
 
 
 
 
-    <script src="{% static 'js/CC.js' %}">
+    {% comment %} <script src="{% static 'js/CC.js' %}"> {% endcomment %}
     
 {% endblock %}

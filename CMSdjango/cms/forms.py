@@ -32,10 +32,11 @@ class EditUserProfileForm(UserChangeForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model=Course
-        fields=['CourseName', 'CourseCredits', 'CourseImage', 'Desc', 'Tags']
-        widgets={'CourseName':forms.TextInput(widget = forms.TextInput(attrs={'class':'form-control'})),
-        'CourseCredits':forms.IntegerField(widget = forms.IntegerField(attrs={'class':'form-control'})),
-        'CourseImage':forms.ImageField(widget = forms.ImageField(attrs={'class':'form-control'})),
-        'Desc':forms.Textarea(widget = forms.Textarea(attrs={'class':'form-control'})),
-        'Tags':forms.TextInput(widget = forms.TextInput(attrs={'class':'form-control'})),
+        fields=['CourseName', 'Desc', ]
+        labels={'CourseName':'Course Name','Desc':'Description'}
+        widgets={'CourseName':forms.TextInput(attrs={'class':'form-control'}),
+        # 'CourseCredits':forms.IntegerField(attrs={'class':'form-control'}),
+        # 'CourseImage':forms.ImageField(attrs={'class':'form-control'}),
+        'Desc':forms.Textarea(attrs={'class':'form-control'}),
+        # 'Tags':forms.TextInput(attrs={'class':'form-control'}),
         }

@@ -32,7 +32,22 @@ def Catalog(request):
 
 def CC(request):
     if request.user.is_authenticated:
-        return render(request,'cms/CC.html', {'name':request.user})
+        print(request.method)
+        if request.method=="POST":
+            form=CourseForm(request.POST)
+            print(form, "aaaaaaaaaaaaa")
+            if form.is_valid():
+                cname=form.cleaned_data['CourseName']
+                desc=form.cleaned_data['Desc']
+                pst=Course(CourseName=cname, Desc=desc)
+                pst.save()
+                print(pst,"bbbbbbbbbbb")
+                form=CourseForm()
+
+        else:
+            form=CourseForm()
+
+        return render(request,'cms/CC.html', {'form':form})
     else:
         return HttpResponseRedirect('/')
 
@@ -159,7 +174,7 @@ def display(request):
 
 #Sign up View function
 def sign_up(request):
-    print(request.method)
+    # print(request.method)
     if request.method == "POST":
         form=SignUpForm(request.POST)
         if form.is_valid():
@@ -173,7 +188,7 @@ def sign_up(request):
 
 #Login View
 def user_login(request):
-    print(request) 
+    # print(request) 
     if not request.user.is_authenticated:
         if request.method == 'POST':
             form = AuthenticationForm(request=request, data=request.POST)
