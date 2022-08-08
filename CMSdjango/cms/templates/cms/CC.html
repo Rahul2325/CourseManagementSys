@@ -8,7 +8,7 @@ Create Course
     <!-- <h3 class="create my-2" style="color: rgb(0, 0, 0); text-align: center; font-weight: bold; ">Create a Course </h3> -->
     <div class="container my-4 pb-1">
 
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Submit" class="btn btn-success">

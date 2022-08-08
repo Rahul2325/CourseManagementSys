@@ -34,14 +34,17 @@ def CC(request):
     if request.user.is_authenticated:
         print(request.method)
         if request.method=="POST":
-            form=CourseForm(request.POST)
+            form=CourseForm(request.POST, request.FILES)
             print(form, "aaaaaaaaaaaaa")
             if form.is_valid():
-                cname=form.cleaned_data['CourseName']
-                desc=form.cleaned_data['Desc']
-                pst=Course(CourseName=cname, Desc=desc)
+                # form= form.save()
+                cname=request.POST.get('CourseName')
+                desc=request.POST.get('Desc')
+                cimage=request.FILES['CourseImage']
+                print("hello")
+                pst=Course(CourseName=cname, Desc=desc, CourseImage=cimage)
                 pst.save()
-                print(pst,"bbbbbbbbbbb")
+                # print(pst,"bbbbbbbbbbb")
                 form=CourseForm()
 
         else:
