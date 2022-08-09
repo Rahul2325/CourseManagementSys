@@ -41,8 +41,10 @@ def CC(request):
                 cname=request.POST.get('CourseName')
                 desc=request.POST.get('Desc')
                 cimage=request.FILES['CourseImage']
+                credit=request.POST.get('CourseCredits')
+                Tags=request.POST.get('Tags')
                 print("hello")
-                pst=Course(CourseName=cname, Desc=desc, CourseImage=cimage)
+                pst=Course(CourseName=cname, Desc=desc, CourseImage=cimage, CourseCredits=credit, Tags=Tags)
                 pst.save()
                 # print(pst,"bbbbbbbbbbb")
                 form=CourseForm()
