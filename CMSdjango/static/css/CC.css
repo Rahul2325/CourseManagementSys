@@ -6,9 +6,7 @@
 }
 body{
     background: linear-gradient(135deg, #f0f0f0f0 25%, #a8a8a8 75%, #888888 100%);
-    /* background:#ececec; */
-    height:120vh;
-    /* width:auto; */
+    width:auto;
 }
 
 img { 
