@@ -26,7 +26,7 @@ def Catalog(request):
     # fdata = data.filter(id=Update_Profile)
     if request.user.is_authenticated:
         courses=Course.objects.all()
-        return render(request,'cms/Catalog.html', {'courses':courses})
+        return render(request,'cms/Catalog.html', {'name':request.user, 'courses':courses})
     else:
         return HttpResponseRedirect('/')
 
@@ -52,7 +52,7 @@ def CC(request):
         else:
             form=CourseForm()
 
-        return render(request,'cms/CC.html', {'form':form})
+        return render(request,'cms/CC.html', {'name':request.user, 'form':form})
     else:
         return HttpResponseRedirect('/')
 
@@ -74,7 +74,7 @@ def CO(request):
         else:
             form=ComponentsForm()
 
-        return render(request,'cms/Units.html', {'form':form})
+        return render(request,'cms/Units.html', {'name':request.user, 'form':form})
     else:
         return HttpResponseRedirect('/')
 
@@ -98,7 +98,7 @@ def Units(request):
         else:
             form=UnitsForm()
 
-        return render(request,'cms/Units.html', {'form':form})
+        return render(request,'cms/Units.html', {'name':request.user, 'form':form})
     else:
         return HttpResponseRedirect('/')
 
