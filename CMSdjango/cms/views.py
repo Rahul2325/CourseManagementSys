@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import SignUpForm, EditUserProfileForm, CourseForm, ComponentsForm
+from .forms import SignUpForm, EditUserProfileForm, CourseForm, ComponentsForm, UnitsForm
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
@@ -35,7 +35,7 @@ def CC(request):
         print(request.method)
         if request.method=="POST":
             form=CourseForm(request.POST, request.FILES)
-            print(form, "aaaaaaaaaaaaa")
+            # print(form, "aaaaaaaaaaaaa")
             if form.is_valid():
                 # form= form.save()
                 cname=request.POST.get('CourseName')
@@ -65,19 +65,40 @@ def CO(request):
             if form.is_valid():
                 # form= form.save()
                 Modules=request.POST.get('Modules')
-                Units=request.POST.get('Units')
-                Texts=request.POST.get('Text')
                 print("hello Dude")
-                pst=Components(Modules=Modules, Units = Units, Text = Texts)
+                pst=Components(Modules=Modules)
                 pst.save()
                 # print(pst,"bbbbbbbbbbb")
-                # form = CourseForm()
-                # form = ComponentsForm()
+                return redirect('Units')
 
         else:
             form=ComponentsForm()
 
-        return render(request,'cms/CO.html', {'form':form})
+        return render(request,'cms/Units.html', {'form':form})
+    else:
+        return HttpResponseRedirect('/')
+
+def Units(request):
+    if request.user.is_authenticated:
+        print(request.method)
+        if request.method=="POST":
+            form=UnitsForm(request.POST)
+            print(form, "Unitttsssss")
+            if form.is_valid():
+                # form= form.save()
+                Units=request.POST.get('Units')
+                Texts=request.POST.get('Text')
+                print("hello Dude")
+                pst=ModelUnits(Units = Units, Text = Texts)
+                pst.save()
+                # print(pst,"bbbbbbbbbbb")
+                form=UnitsForm()
+                return redirect('Catalog')
+
+        else:
+            form=UnitsForm()
+
+        return render(request,'cms/Units.html', {'form':form})
     else:
         return HttpResponseRedirect('/')
 

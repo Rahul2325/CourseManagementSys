@@ -13,10 +13,18 @@ class Course(models.Model):
         return self.CourseName
 
 class Components(models.Model):
-    Modules=models.CharField(max_length=30)
-    Units=models.CharField(max_length=30)
-    Text=models.TextField()
+    component = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    Modules = models.CharField(max_length=30)
     # Video=models.FileField(upload_to = "Video")
 
     def __str__(self):
         return self.Modules
+
+class ModelUnits(models.Model):
+    unit = models.ForeignKey(Components, on_delete=models.CASCADE, null=True)
+    Units = models.CharField(max_length=30)
+    Text = models.TextField()
+    # Video=models.FileField(upload_to = "Video")
+
+    def __str__(self):
+        return self.Units

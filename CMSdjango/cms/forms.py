@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 
-from cms.models import Course, Components
+from cms.models import Course, Components, ModelUnits
 
 class SignUpForm(UserCreationForm):
     password1=forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -46,9 +46,17 @@ class ComponentsForm(forms.ModelForm):
     class Meta:
         model=Components
         fields = '__all__'
-        labels={'Modules':'Add Modules', 'Units':'Add Units', 'Text':'Text'}
+        labels={'Modules':'Add Modules',}
         widgets={'Modules':forms.TextInput(attrs={'class':'form-control'}),
         'Units':forms.TextInput(attrs={'class':'form-control'}),
         'Text':forms.Textarea(attrs={'class':'form-control'}),
         }
 
+class UnitsForm(forms.ModelForm):
+    class Meta:
+        model=ModelUnits
+        fields = '__all__'
+        labels={'Units':'Add Units', 'Text':'Text'}
+        widgets={'Units':forms.TextInput(attrs={'class':'form-control'}),
+        'Text':forms.Textarea(attrs={'class':'form-control'}),
+        }
