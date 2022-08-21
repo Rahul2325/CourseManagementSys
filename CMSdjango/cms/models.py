@@ -11,3 +11,12 @@ class Course(models.Model):
 
     def __str__(self):
         return self.CourseName
+
+class Components(models.Model):
+    Modules=models.CharField(max_length=30)
+    Units=models.CharField(max_length=30)
+    Text=models.TextField()
+    # Video=models.FileField(upload_to = "Video")
+
+    def __str__(self):
+        return self.Modules

@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import *
-from .forms import SignUpForm, EditUserProfileForm, CourseForm
+from .forms import SignUpForm, EditUserProfileForm, CourseForm, ComponentsForm
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
@@ -47,7 +47,7 @@ def CC(request):
                 pst=Course(CourseName=cname, Desc=desc, CourseImage=cimage, CourseCredits=credit, Tags=Tags)
                 pst.save()
                 # print(pst,"bbbbbbbbbbb")
-                form=CourseForm()
+                return redirect('CO')
 
         else:
             form=CourseForm()
@@ -58,7 +58,26 @@ def CC(request):
 
 def CO(request):
     if request.user.is_authenticated:
-        return render(request,'cms/CO.html', {'name':request.user})
+        print(request.method)
+        if request.method=="POST":
+            form=ComponentsForm(request.POST)
+            print(form, "COmponentttsssss")
+            if form.is_valid():
+                # form= form.save()
+                Modules=request.POST.get('Modules')
+                Units=request.POST.get('Units')
+                Texts=request.POST.get('Text')
+                print("hello Dude")
+                pst=Components(Modules=Modules, Units = Units, Text = Texts)
+                pst.save()
+                # print(pst,"bbbbbbbbbbb")
+                # form = CourseForm()
+                # form = ComponentsForm()
+
+        else:
+            form=ComponentsForm()
+
+        return render(request,'cms/CO.html', {'form':form})
     else:
         return HttpResponseRedirect('/')
 

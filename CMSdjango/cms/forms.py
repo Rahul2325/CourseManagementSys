@@ -1,8 +1,9 @@
+from dataclasses import fields
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 
-from cms.models import Course
+from cms.models import Course, Components
 
 class SignUpForm(UserCreationForm):
     password1=forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -40,3 +41,14 @@ class CourseForm(forms.ModelForm):
         'Desc':forms.Textarea(attrs={'class':'form-control'}),
         'Tags':forms.TextInput(attrs={'class':'form-control'}),
         }
+
+class ComponentsForm(forms.ModelForm):
+    class Meta:
+        model=Components
+        fields = '__all__'
+        labels={'Modules':'Add Modules', 'Units':'Add Units', 'Text':'Text'}
+        widgets={'Modules':forms.TextInput(attrs={'class':'form-control'}),
+        'Units':forms.TextInput(attrs={'class':'form-control'}),
+        'Text':forms.Textarea(attrs={'class':'form-control'}),
+        }
+
