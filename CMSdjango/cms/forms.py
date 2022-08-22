@@ -48,8 +48,6 @@ class ComponentsForm(forms.ModelForm):
         fields = '__all__'
         labels={'Modules':'Add Modules',}
         widgets={'Modules':forms.TextInput(attrs={'class':'form-control'}),
-        'Units':forms.TextInput(attrs={'class':'form-control'}),
-        'Text':forms.Textarea(attrs={'class':'form-control'}),
         }
 
 class UnitsForm(forms.ModelForm):
@@ -59,4 +57,5 @@ class UnitsForm(forms.ModelForm):
         labels={'Units':'Add Units', 'Text':'Text'}
         widgets={'Units':forms.TextInput(attrs={'class':'form-control'}),
         'Text':forms.Textarea(attrs={'class':'form-control'}),
+        'Video':forms.TextInput(attrs={'class':'form-control'}),
         }

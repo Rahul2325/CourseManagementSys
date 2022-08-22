@@ -24,8 +24,7 @@ class ModelUnits(models.Model):
     unit = models.ForeignKey(Components, on_delete=models.CASCADE, null=True)
     Units = models.CharField(max_length=30)
     Text = models.TextField()
-    # Video=models.FileField(upload_to = "Video")
-
+    Video=models.TextField(max_length=100, null=True)
     def __str__(self):
         return self.Units
 
