@@ -286,3 +286,35 @@ def user_change_pass(request):
         fm=PasswordChangeForm(user=request.user)
     return render(request, 'cms/changepass.html', {'name':request.user,'form':fm})
 
+#Update_Course
+
+def Update_Course(request,id):
+    print("Rahullllllllllllllllllllllllllll", request.method)
+    if request.user.is_authenticated:
+        print("Rahul", request.method)
+        if request.method == 'POST':
+            cpi = Course.objects.get(pk=id)
+            # print(cpi, "hhhhhhhhh-----------------")
+            Cform=CourseForm(request.POST, request.FILES, instance=cpi)
+            Uform=UnitsForm(request.POST)
+            Mform=ComponentsForm(request.POST)
+            if Cform.is_valid():
+                Cform.save()
+            if Mform.is_valid():
+                Mform.save()
+            if Uform.is_valid():
+                Uform.save()
+                return redirect('Catalog')
+        else:
+            cpi = Course.objects.get(pk=id) 
+            # print(cpi, "hhhhhhhhh-----------------")
+            upi = ModelUnits.objects.get(pk=id) 
+            # print(upi, "hhhhhhhhh-----------------")
+            mpi = Components.objects.get(pk=id) 
+            # print(mpi, "hhhhhhhhh-----------------")
+            Cform=CourseForm(instance=cpi) 
+            Uform=UnitsForm(instance=upi) 
+            Mform=ComponentsForm(instance=mpi)
+        return render(request, 'cms/Update_Course.html', {'Cform':Cform, 'Uform':Uform, 'Mform':Mform})
+    else:
+        return HttpResponseRedirect('/')

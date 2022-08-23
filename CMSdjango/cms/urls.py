@@ -19,6 +19,7 @@ urlpatterns = [
     path('profile',views.user_profile, name="profile"),
     path('changepass',views.user_change_pass, name="changepass"),
     path('Units',views.Units, name="Units"),
+    path('Update_Course/<int:id>',views.Update_Course, name="Update_Course"),
     path('logout', views.user_logout, name="logout")
 
 ]

@@ -15,7 +15,6 @@ class Course(models.Model):
 class Components(models.Model):
     component = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     Modules = models.CharField(max_length=30)
-    # Video=models.FileField(upload_to = "Video")
 
     def __str__(self):
         return self.Modules

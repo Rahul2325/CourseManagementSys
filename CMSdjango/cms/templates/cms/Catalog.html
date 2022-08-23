@@ -15,7 +15,7 @@ Catalog
           <div class="card-body">
               <h5 class="card-title" style="text-align: center;">{{course.CourseName}}</h5>
               <p class="card-text">{{course.Desc}}</p>
-              <a href="#" class="btn btn-outline-primary btn-sm">Edit</a>
+              <a href="{% url 'Update_Course' course.id%}" class="btn btn-outline-primary btn-sm">Edit</a>
               <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
           </div>
           </div> 
