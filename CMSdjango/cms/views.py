@@ -74,7 +74,7 @@ def CO(request):
         else:
             form=ComponentsForm()
 
-        return render(request,'cms/Units.html', {'name':request.user, 'form':form})
+        return render(request,'cms/CO.html', {'name':request.user, 'form':form})
     else:
         return HttpResponseRedirect('/')
 
@@ -318,3 +318,17 @@ def Update_Course(request,id):
         return render(request, 'cms/Update_Course.html', {'Cform':Cform, 'Uform':Uform, 'Mform':Mform})
     else:
         return HttpResponseRedirect('/')
+
+
+def Delete_Course(request, id):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            pi = Course.objects.get(pk=id)
+            ci = Components.objects.get(pk=id)
+            ui = ModelUnits.objects.get(pk=id)
+            pi.delete()
+            ci.delete()
+            ui.delete()
+        return HttpResponseRedirect('/Catalog')
+    else:
+        return HttpResponseRedirect('/login')

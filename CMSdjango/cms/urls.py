@@ -20,6 +20,7 @@ urlpatterns = [
     path('changepass',views.user_change_pass, name="changepass"),
     path('Units',views.Units, name="Units"),
     path('Update_Course/<int:id>',views.Update_Course, name="Update_Course"),
+    path('Delete_Course/<int:id>',views.Delete_Course, name="Delete_Course"),
     path('logout', views.user_logout, name="logout")
 
 ]

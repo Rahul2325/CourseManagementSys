@@ -94,3 +94,22 @@ document.querySelector('#sub').onclick = () =>{
     var course = document.querySelector('#cnam').value;
     localStorage.setItem('Course',course);
 }   
+
+
+//for video
+document.querySelector('#savemp4').onclick = () => {
+    var input_video = document.querySelector('#id_Video').value;
+    if(input_video.length===0){
+        alert("Please enter the video link!");
+    }
+    else{
+        var mp4 = input_video.replace("watch?v=","embed/") ;
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('width', '730');
+        iframe.setAttribute('height', '315');
+        iframe.setAttribute('src', mp4);
+        console.log(iframe);
+        document.getElementById("storemp4").appendChild(iframe);
+    }
+    document.querySelector('#id_Video').value = '';
+}

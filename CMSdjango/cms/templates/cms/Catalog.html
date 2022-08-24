@@ -15,8 +15,15 @@ Catalog
           <div class="card-body">
               <h5 class="card-title" style="text-align: center;">{{course.CourseName}}</h5>
               <p class="card-text">{{course.Desc}}</p>
-              <a href="{% url 'Update_Course' course.id%}" class="btn btn-outline-primary btn-sm">Edit</a>
-              <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+              <tr>
+                <td class="text-center">
+                  <a href="{% url 'Update_Course' course.id%}" class="btn btn-outline-primary btn-sm">Edit</a>
+                  <form action="{% url 'Delete_Course' course.id %}" method="post" class="d-inline">{% csrf_token %}
+                    <input type="submit" class="btn btn-outline-danger btn-sm" value="Delete">
+                  {% comment %} <a href="{% url 'deleteCourse' course.id %}" class="btn btn-outline-danger btn-sm">Delete</a> {% endcomment %}
+                  </form>
+                </td>
+              </tr>
           </div>
           </div> 
         </div>

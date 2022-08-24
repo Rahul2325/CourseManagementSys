@@ -13,14 +13,14 @@ class Course(models.Model):
         return self.CourseName
 
 class Components(models.Model):
-    component = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
+    Select_Course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
     Modules = models.CharField(max_length=30)
 
     def __str__(self):
         return self.Modules
 
 class ModelUnits(models.Model):
-    unit = models.ForeignKey(Components, on_delete=models.CASCADE, null=True)
+    Select_Module = models.ForeignKey(Components, on_delete=models.CASCADE, null=True)
     Units = models.CharField(max_length=30)
     Text = models.TextField()
     Video=models.TextField(max_length=100, null=True)
